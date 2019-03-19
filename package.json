@@ -1,0 +1,9 @@
+{
+	"dependencies": ["base"],
+	"autoload": {
+		"directories": ["results", "services", "exceptions"],
+		"files": [{
+			"file": "API.php"
+		}]
+	}
+}
