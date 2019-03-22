@@ -14,7 +14,11 @@ class Waypoint {
 	 * @return Waypoint
 	 */
 	public static function fromArray(array $data): Waypoint {
-		return new Waypoint($data['name'], $data['location'], $data['distance'], $data['hint']);
+		$waypoint = new Waypoint($data['name'], $data['location'], $data['hint']);
+		if (isset($data['distance'])) {
+			$waypoint->distance = $data['distance'];
+		}
+		return $waypoint;
 	}
 
 	/** @var string Name of the street the coordinate snapped to */
@@ -23,7 +27,7 @@ class Waypoint {
 	/** @var float[] Array that contains the [longitude, latitude] pair of the snapped coordinate */
 	protected $location;
 
-	/** @var float The distance, in metres, from the input coordinate to the snapped coordinate */
+	/** @var float|null The distance, in metres, from the input coordinate to the snapped coordinate */
 	protected $distance;
 
 	/** @var string  Unique internal identifier of the segment (ephemeral, not constant over data updates) This can be used on subsequent request to significantly speed up the query and to connect multiple services.
@@ -36,10 +40,9 @@ class Waypoint {
 	 * @param float $distance
 	 * @param string $hint
 	 */
-	public function __construct(string $name, array $location, float $distance, string $hint) {
+	public function __construct(string $name, array $location, string $hint) {
 		$this->name = $name;
 		$this->location = $location;
-		$this->distance = $distance;
 		$this->hint = $hint;
 	}
 
