@@ -1,7 +1,7 @@
 <?php
 namespace packages\OSRM;
 
-class StepManeuver {
+class StepManeuver implements \JsonSerializable {
 
 	/**
 	 * Construct a StepManeuver object from array
@@ -203,5 +203,14 @@ class StepManeuver {
 	 */ 
 	public function setExit(?int $exit): void {
 		$this->exit = $exit;
+	}
+
+	/**
+	 * Make json serializable.
+	 * 
+	 * @return mixed
+	 */
+	public function jsonSerialize() {
+		return get_object_vars($this);
 	}
 }

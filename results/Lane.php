@@ -4,7 +4,7 @@ namespace packages\OSRM;
 /**
  * A Lane represents a turn lane at the corresponding turn location.
  */
-class Lane {
+class Lane implements \JsonSerializable {
 
 	/**
 	 * Construct a Lane object from array
@@ -80,5 +80,14 @@ class Lane {
 	 */ 
 	public function setValid(bool $valid): void {
 		$this->valid = $valid;
+	}
+
+	/**
+	 * Make json serializable.
+	 * 
+	 * @return mixed
+	 */
+	public function jsonSerialize() {
+		return get_object_vars($this);
 	}
 }

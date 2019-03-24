@@ -4,7 +4,7 @@ namespace packages\OSRM;
 /**
  * Represents a route through (potentially multiple) waypoints.
  */
-class Route {
+class Route implements \JsonSerializable {
 	
 	/**
 	 * Construct a Route object from array
@@ -161,5 +161,14 @@ class Route {
 	 */ 
 	public function setLegs(array $legs): void {
 		$this->legs = $legs;
+	}
+
+	/**
+	 * Make json serializable.
+	 * 
+	 * @return mixed
+	 */
+	public function jsonSerialize() {
+		return get_object_vars($this);
 	}
 }

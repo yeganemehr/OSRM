@@ -6,7 +6,7 @@ namespace packages\OSRM;
  * For every step, the very first intersection (intersections[0]) corresponds to the location of the StepManeuver. 
  * Further intersections are listed for every cross-way until the next turn instruction.
  */
-class Intersection {
+class Intersection implements \JsonSerializable {
 
 	/**
 	 * Construct a Intersection object from array
@@ -209,5 +209,14 @@ class Intersection {
 	 */ 
 	public function setLanes(?array $lanes): void {
 		$this->lanes = $lanes;
+	}
+
+	/**
+	 * Make json serializable.
+	 * 
+	 * @return mixed
+	 */
+	public function jsonSerialize() {
+		return get_object_vars($this);
 	}
 }

@@ -4,7 +4,7 @@ namespace packages\OSRM;
 /**
  * A step consists of a maneuver such as a turn or merge, followed by a distance of travel along a single way to the subsequent step.
  */
-class RouteStep {
+class RouteStep implements \JsonSerializable {
 
 	/**
 	 * Construct a RouteStep object from array
@@ -386,5 +386,14 @@ class RouteStep {
 	 */ 
 	public function setDrivingSide(string $drivingSide): void {
 		$this->drivingSide = $drivingSide;
+	}
+
+	/**
+	 * Make json serializable.
+	 * 
+	 * @return mixed
+	 */
+	public function jsonSerialize() {
+		return get_object_vars($this);
 	}
 }

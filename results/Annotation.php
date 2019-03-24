@@ -4,7 +4,7 @@ namespace packages\OSRM;
 /**
  * Annotation of the whole route leg with fine-grained information about each segment or node id.
  */
-class Annotation {
+class Annotation implements \JsonSerializable {
 
 	/**
 	 * Construct a Annotation object from array
@@ -192,5 +192,14 @@ class Annotation {
 	 */ 
 	public function setMetadata($metadata): void {
 		$this->metadata = $metadata;
+	}
+
+	/**
+	 * Make json serializable.
+	 * 
+	 * @return mixed
+	 */
+	public function jsonSerialize() {
+		return get_object_vars($this);
 	}
 }

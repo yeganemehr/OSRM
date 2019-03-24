@@ -4,7 +4,7 @@ namespace packages\OSRM;
 /**
  * Object used to describe waypoint on a route.
  */
-class Waypoint {
+class Waypoint implements \JsonSerializable {
 
 	/**
 	 * Construct a Waypoint object from array
@@ -116,5 +116,14 @@ class Waypoint {
 	 */ 
 	public function setHint(string $hint): void {
 		$this->hint = $hint;
+	}
+	
+	/**
+	 * Make json serializable.
+	 * 
+	 * @return mixed
+	 */
+	public function jsonSerialize() {
+		return get_object_vars($this);
 	}
 }

@@ -4,7 +4,7 @@ namespace packages\OSRM;
 /**
  * Represents a route between two waypoints.
  */
-class RouteLeg {
+class RouteLeg implements \JsonSerializable {
 
 	/**
 	 * Construct a RouteLeg object from array
@@ -168,5 +168,14 @@ class RouteLeg {
 	 */ 
 	public function setAnnotation(?Annotation $annotation): void {
 		$this->annotation = $annotation;
+	}
+	
+	/**
+	 * Make json serializable.
+	 * 
+	 * @return mixed
+	 */
+	public function jsonSerialize() {
+		return get_object_vars($this);
 	}
 }
