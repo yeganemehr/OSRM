@@ -228,7 +228,7 @@ class Routing {
 			$query['alternatives'] = json\encode($this->alternatives);
 		}
 		if ($this->steps) {
-			$query['steps'] = true;
+			$query['steps'] = "true";
 		}
 		if ($this->annotations !== false) {
 			$query['annotations'] = $this->annotations === true ? "true" : $this->annotations;
