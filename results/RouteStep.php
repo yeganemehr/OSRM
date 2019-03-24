@@ -26,8 +26,7 @@ class RouteStep implements \JsonSerializable {
 			$data['name'],
 			$data['mode'],
 			$data['maneuver'],
-			$data['intersections'],
-			$data['drivingSide']
+			$data['intersections']
 		);
 		if (isset($data['ref'])) {
 			$step->ref = $data['ref'];
@@ -46,6 +45,9 @@ class RouteStep implements \JsonSerializable {
 		}
 		if (isset($data['rotaryPronunciation'])) {
 			$step->rotaryPronunciation = $data['rotaryPronunciation'];
+		}
+		if (isset($data['drivingSide'])) {
+			$step->drivingSide = $data['drivingSide'];
 		}
 		return $step;
 	}
@@ -89,7 +91,7 @@ class RouteStep implements \JsonSerializable {
 	/** @var string|null  The pronunciation hint of the rotary name. Optionally included, if the step is a rotary and a rotary pronunciation is available. */
 	protected $rotaryPronunciation;
 
-	/** @var string The legal driving side at the location for this step. Either "left" or "right". */
+	/** @var string|null The legal driving side at the location for this step. Either "left" or "right". */
 	protected $drivingSide;
 
 	/**
@@ -109,8 +111,7 @@ class RouteStep implements \JsonSerializable {
 		string $name,
 		string $mode,
 		StepManeuver $maneuver,
-		array $intersections,
-		string $drivingSide
+		array $intersections
 	) {
 		$this->distance = $distance;
 		$this->duration = $duration;
@@ -119,7 +120,6 @@ class RouteStep implements \JsonSerializable {
 		$this->mode = $mode;
 		$this->maneuver = $maneuver;
 		$this->intersections = $intersections;
-		$this->drivingSide = $drivingSide;
 	}
 
 	/**
@@ -372,19 +372,19 @@ class RouteStep implements \JsonSerializable {
 	/**
 	 * Get legal driving side at the location for this step.
 	 * 
-	 * @return string Either "left" or "right"
+	 * @return string|null Either "left" or "right"
 	 */ 
-	public function getDrivingSide(): string {
+	public function getDrivingSide(): ?string {
 		return $this->drivingSide;
 	}
 
 	/**
 	 * Set legal driving side at the location for this step.
 	 *
-	 * @param string $drivingSide Either "left" or "right"
+	 * @param string|null $drivingSide Either "left" or "right"
 	 * @return void
 	 */ 
-	public function setDrivingSide(string $drivingSide): void {
+	public function setDrivingSide(?string $drivingSide): void {
 		$this->drivingSide = $drivingSide;
 	}
 
